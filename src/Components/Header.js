@@ -1,11 +1,11 @@
 import React from "react";
 
-const Header = () => {
+const Header = ({ title }) => {
   return (
-    <>
-      <h1>Katalog filmowy</h1>
+    <div className="header">
+      <h1>{title}</h1>
       <p>Aplikacja nr 2 z przedmiotu Wykorzystywanie wzorców w internecie</p>
-    </>
+    </div>
   );
 };
 
