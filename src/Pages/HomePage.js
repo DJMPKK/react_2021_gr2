@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "../Components/Header";
 import { Container } from "react-bootstrap";
 import SearchBar from "../Components/SearchBar";
 import Catalog from "../Components/Catalog";
 import Footer from "../Components/Footer";
+import { movieFilter } from "../filter.js";
 
 const myTitle = "Super extra katalog filmowy";
 
@@ -132,16 +133,25 @@ const allMovies = [
 ];
 
 const HomePage = () => {
+  const [searchWord, setSearchWord] = useState();
 
+  /// 1. funkcja filtrująca filmy
+  /// 2. jeżeli searchWord istnieje to przekazujemy do Catalog wyfiltrowaną tablicę filmów
+  /// a jeżeli nie istnieje to przekazujemy do Catalog allMovies
 
-// 
+  const movies = searchWord ? movieFilter(allMovies, searchWord) : allMovies;
+
+  const saveUserWord = (data) => {
+    setSearchWord(data);
+  };
+
 
   return (
     <>
       <Container>
         <Header title={myTitle} />
-        <SearchBar />
-        <Catalog movies={allMovies} />
+        <SearchBar getUserWordFunc={saveUserWord} />
+        <Catalog movies={movies} />
       </Container>
       <Footer />
     </>
